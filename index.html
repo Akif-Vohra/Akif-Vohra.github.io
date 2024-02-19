@@ -14,15 +14,21 @@
                 // channel: channel/your_id
                 app = "vnd.youtube://www.youtube.com/@Your_indian_asmr";
 
-                if( /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+                if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
                     window.location = app;
                     window.setTimeout(function() {
                         // couldn't open app, open fallback url
                         window.location = fallback;
                     }, 25);
-                } else {
-                    // open url because device doesn't support youtube app
-                    window.location = fallback;
+                } else if(/Android/i.test(navigator.userAgent))  {
+                    window.location = 'intent://www.youtube.com/@Your_indian_asmr#Intent;package=com.google.android.youtube;scheme=https;end'; 
+                    window.setTimeout(function() {
+                        // couldn't open app, open fallback url
+                        window.location = fallback;
+                    }, 25);
+                }
+		else{
+		    window.location = 'https://www.youtube.com/@Your_indian_asmr'
                 }
 
                 function killPopup() {
